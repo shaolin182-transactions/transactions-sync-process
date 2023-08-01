@@ -29,7 +29,7 @@ allprojects {
 		// Github Maven Repo
 		maven {
 			name = "GitHubPackages"
-			url = uri("https://maven.pkg.github.com/shaolin182/transactions-java")
+			url = uri("https://maven.pkg.github.com/shaolin182-transactions/transactions-java")
 			credentials {
 				username = System.getenv("GITHUB_USERNAME")
 				password = System.getenv("GITHUB_TOKEN")
