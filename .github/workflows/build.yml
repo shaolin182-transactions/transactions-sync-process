@@ -20,7 +20,7 @@ jobs:
       with:
         java-version: 11
     - name: Build with Gradle
-      run: ./gradlew -i -Dsonar.login=$SONAR_TOKEN clean build codeCoverageReport sonarqube
+      run: ./gradlew -i clean build codeCoverageReport sonar --info
       env:
         GITHUB_USERNAME: ${{ github.actor }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

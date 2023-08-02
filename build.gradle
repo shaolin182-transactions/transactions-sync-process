@@ -7,8 +7,9 @@ plugins {
 
 sonarqube {
 	properties {
-		property "sonar.organization", "shaolin182"
-		property "sonar.projectKey", "transactions-sync-process"
+		property "sonar.organization", "shaolin182-transactions"
+		property "sonar.projectKey", "shaolin182-transactions_transactions-sync-process"
+		property "sonar.host.url", "https://sonarcloud.io"
 		property "sonar.jacoco.reportPaths", "${project.buildDir}/reports/jacoco/codeCoverageReport/"
 		property "sonar.coverage.jacoco.xmlReportPaths", "${project.buildDir}/reports/jacoco/codeCoverageReport/codeCoverageReport.xml"
 	}
