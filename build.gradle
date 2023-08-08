@@ -45,8 +45,8 @@ subprojects {
 	apply plugin: "io.spring.dependency-management"
 	apply plugin: "com.adarshr.test-logger"
 
-	sourceCompatibility = 11
-	targetCompatibility = 11
+	sourceCompatibility = 17
+	targetCompatibility = 17
 
 	dependencies {
 		testImplementation("org.springframework.boot:spring-boot-starter-test:${property('spring.version')}") {
@@ -77,6 +77,11 @@ project(':api'){
 		implementation "org.springframework.boot:spring-boot-starter-data-elasticsearch"
 		implementation "org.springframework.boot:spring-boot-starter-actuator"
 
+		implementation platform('org.testcontainers:testcontainers-bom:1.18.3') //import bom
+
+		testImplementation "org.testcontainers:junit-jupiter"
+		testImplementation "org.testcontainers:elasticsearch"
+		testImplementation "org.testcontainers:mongodb"
 		// For mocking repository
 		testImplementation "org.transactions:persistence-mongodb:${property('transaction.version')}"
 

@@ -7,7 +7,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import java.time.OffsetDateTime;
 import java.util.Objects;
 
-@Document(indexName = "#{@elasticSearchDatabaseConfig.getIndex()}", indexStoreType = "transaction")
+@Document(indexName = "#{@elasticSearchDatabaseConfig.getIndex()}")
 public class TransactionES {
 
     private String id;

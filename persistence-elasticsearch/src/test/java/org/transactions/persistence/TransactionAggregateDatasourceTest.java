@@ -1,6 +1,5 @@
 package org.transactions.persistence;
 
-import org.elasticsearch.client.RestHighLevelClient;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -8,6 +7,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.model.transactions.Transaction;
+import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.transactions.persistence.config.ElasticSearchDatabaseConfig;
 import org.transactions.persistence.factories.TransactionESFactory;
 import org.transactions.persistence.model.TransactionES;
@@ -29,7 +29,7 @@ class TransactionAggregateDatasourceTest {
     TransactionAggregateRepository repository;
 
     @Mock
-    RestHighLevelClient esClient;
+    ElasticsearchOperations esClient;
 
     @Mock
     ElasticSearchDatabaseConfig esConfig;

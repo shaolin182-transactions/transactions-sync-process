@@ -1,4 +1,4 @@
-FROM gradle:6.6.0-jdk11 AS build
+FROM gradle:8.2.1-jdk17-alpine AS build
 
 ARG USER
 ARG PASSWORD

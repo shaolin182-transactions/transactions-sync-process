@@ -1,0 +1,117 @@
+[
+    {
+        "id" : "5f2c159c7602f27ba01133e3",
+        "description" : "a fake description",
+        "transactions" : [
+            {
+                "category" : {
+                    "id": 17,
+                    "category" : "Autres",
+                    "label" : "Cadeaux",
+                    "type": "EXTRA"
+                },
+                "bankAccount" : {
+                    "id": 21,
+                    "category" : "Commun",
+                    "label" : "CMB"
+                },
+                "income" : 0,
+                "outcome": 39.95000076293945
+            },
+            {
+                "category" : {
+                    "id": 14,
+                    "category" : "Alimentaire",
+                    "label" : "Supermarché",
+                    "type": "COURANTE"
+                },
+                "bankAccount" : {
+                    "id": 21,
+                    "category" : "Commun",
+                    "label" : "CMB"
+                },
+                "income" : 0,
+                "outcome": 35.16999816894531
+            }
+
+        ],
+        "cost" : -7512,
+        "costAbs" : 7512
+    },
+    {
+        "id" : "2",
+        "description" : "a fake description",
+        "transactions" : [
+            {
+                "category" : {
+                    "id": 17,
+                    "category" : "Autres",
+                    "label" : "Cadeaux",
+                    "type": "EXTRA"
+                },
+                "bankAccount" : {
+                    "id": 2,
+                    "category" : "category 2A",
+                    "label" : "label bank account 2A"
+                },
+                "income" : 2,
+                "outcome": 0
+            }
+        ],
+        "cost" : 400,
+        "costAbs" : 400
+    },
+    {
+        "id" : "3",
+        "description" : "a fake description",
+        "transactions" : [
+            {
+                "category" : {
+                    "id": 17,
+                    "category" : "Autres",
+                    "label" : "Cadeaux",
+                    "type": "EXTRA"
+                },
+                "bankAccount" : {
+                    "id": 3,
+                    "category" : "category 3B",
+                    "label" : "label bank account 3B"
+                },
+                "income" : 2,
+                "outcome": 0
+            },
+            {
+                "category" : {
+                    "id": 17,
+                    "category" : "Autres",
+                    "label" : "Cadeaux",
+                    "type": "EXTRA"
+                },
+                "bankAccount" : {
+                    "id": 3,
+                    "category" : "category 3B",
+                    "label" : "label bank account 3B"
+                },
+                "income" : 4,
+                "outcome": 0
+            },
+            {
+                "category" : {
+                    "id": 3,
+                    "category" : "category 3C",
+                    "label" : "label category 3C",
+                    "type": "COURANTE"
+                },
+                "bankAccount" : {
+                    "id": 4,
+                    "category" : "category 3C",
+                    "label" : "label bank account 3C"
+                },
+                "income" : 3,
+                "outcome": 0
+            }
+        ],
+        "cost" : 900,
+        "costAbs" : 900
+    }
+]
