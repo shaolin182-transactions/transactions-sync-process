@@ -20,7 +20,7 @@ jobs:
       with:
         java-version: 17
     - name: Build with Gradle
-      run: ./gradlew -i clean build codeCoverageReport sonar --info
+      run: ./gradlew -i clean build jacocoTestReport sonar --info
       env:
         GITHUB_USERNAME: ${{ github.actor }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
