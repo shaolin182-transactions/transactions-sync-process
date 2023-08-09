@@ -10,7 +10,7 @@ RUN mkdir -p /workspace
 WORKDIR /workspace
 COPY . /workspace
 RUN chmod +x gradlew
-RUN ./gradlew --no-daemon build
+RUN ./gradlew --no-daemon build -x test
 
 FROM eclipse-temurin:17-alpine
 

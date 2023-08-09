@@ -60,9 +60,6 @@ subprojects {
 	test {
 		useJUnitPlatform()
 	}
-
-
-
 }
 
 project(':api'){

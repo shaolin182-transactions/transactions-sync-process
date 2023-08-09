@@ -79,6 +79,7 @@ public class IntegrationTest {
     }
 
     @Test
+    @Tag("IntegrationTest")
     @DisplayName("Records existing in mongo database should be exported into ES database")
     void nominalCase() throws Exception {
         // Prepare Data - Insert Data into mongodb database
