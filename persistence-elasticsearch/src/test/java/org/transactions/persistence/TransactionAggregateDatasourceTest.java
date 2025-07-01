@@ -8,6 +8,8 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.model.transactions.Transaction;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
+import org.springframework.data.elasticsearch.core.IndexOperations;
+import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
 import org.transactions.persistence.config.ElasticSearchDatabaseConfig;
 import org.transactions.persistence.factories.TransactionESFactory;
 import org.transactions.persistence.model.TransactionES;
@@ -32,6 +34,9 @@ class TransactionAggregateDatasourceTest {
     ElasticsearchOperations esClient;
 
     @Mock
+    IndexOperations indexOperations;
+
+    @Mock
     ElasticSearchDatabaseConfig esConfig;
 
     @AfterEach
@@ -44,6 +49,8 @@ class TransactionAggregateDatasourceTest {
         List<Transaction> transactions = new ArrayList<>();
         List<TransactionES> transactionES = new ArrayList<>();
 
+        Mockito.when(esConfig.getIndex()).thenReturn("transactions");
+        Mockito.when(esClient.indexOps((IndexCoordinates) Mockito.any())).thenReturn(indexOperations);
         Mockito.when(factory.buildTransactionESList(transactions)).thenReturn(transactionES);
 
         new TransactionAggregateDatasource(factory, repository, esClient, esConfig).publishData(transactions);

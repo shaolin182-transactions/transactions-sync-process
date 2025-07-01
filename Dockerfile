@@ -1,4 +1,4 @@
-FROM gradle:8.2.1-jdk17-alpine AS build
+FROM gradle:8.13.0-jdk21-alpine AS build
 
 ARG USER
 ARG PASSWORD
@@ -12,7 +12,7 @@ COPY . /workspace
 RUN chmod +x gradlew
 RUN ./gradlew --no-daemon build -x test
 
-FROM eclipse-temurin:17-alpine
+FROM eclipse-temurin:21-alpine
 
 ENV TARGET_ENV=dev
 ENV CONFIG_LOCATION=/etc/config/application.properties

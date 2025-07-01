@@ -33,5 +33,6 @@ public class SyncService implements ISyncService {
 
         // publish data to elasticSearch datasource
         aggregateDatasource.publishData(transactions);
+        System.out.println("DONE");
     }
 }
