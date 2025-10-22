@@ -1,0 +1,18 @@
+name: transactions_sync_partners
+services:
+
+  mongo6:
+    container_name: sync-dev-transactions-mongo-db-6
+    image: mongo:6.0.7
+    ports:
+      - "27017:27017"
+
+  elasticsearch:
+    container_name: sync-dev-elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.8.1
+    ports:
+      - "9200:9200"
+    environment:
+      discovery.type: single-node
+      cluster.name: elasticsearch
+      xpack.security.enabled: false

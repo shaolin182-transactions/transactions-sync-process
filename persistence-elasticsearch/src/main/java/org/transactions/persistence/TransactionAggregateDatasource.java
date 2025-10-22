@@ -40,7 +40,11 @@ public class TransactionAggregateDatasource implements ITransactionsAggregateDat
         List<TransactionES> transactionsToPublish = factory.buildTransactionESList(transactions);
 
         // publish them to ES
+        if (!clientES.indexOps(IndexCoordinates.of(esConfig.getIndex())).exists()){
+            clientES.indexOps(IndexCoordinates.of(esConfig.getIndex())).create();
+        }
         repository.saveAll(transactionsToPublish);
+
     }
 
     @Override

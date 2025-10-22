@@ -4,27 +4,29 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.transactions.persistence.repositories.TransactionAggregateRepository;
 import org.transactions.persistence.repositories.TransactionsRepository;
-import org.transactions.transactionssyncprocess.controller.SyncController;
+import org.transactions.transactionssyncprocess.service.AppStartService;
 
 @SpringBootTest
+@ActiveProfiles("test")
 class ApplicationTest {
 
     @Autowired
-    private SyncController controller;
+    AppStartService service;
 
     // Mock persistence layer
-    @MockBean
+    @MockitoBean
     TransactionsRepository repository;
 
     // Mock persistence layer
-    @MockBean
+    @MockitoBean
     TransactionAggregateRepository aggregateRepository;
 
     @Test
     public void contextLoads() throws Exception {
-        Assertions.assertNotNull(controller);
+        Assertions.assertNotNull(service);
     }
 }

@@ -21,7 +21,7 @@ allprojects {
 	version = '0.0.1-SNAPSHOT'
 
 	jacoco {
-		toolVersion = '0.8.5'
+		toolVersion = '0.8.13'
 	}
 
 	repositories {
@@ -47,13 +47,15 @@ subprojects {
 	apply plugin: "io.spring.dependency-management"
 	apply plugin: "com.adarshr.test-logger"
 
-	sourceCompatibility = 17
-	targetCompatibility = 17
+	sourceCompatibility = 21
+	targetCompatibility = 21
 
 	dependencies {
 		testImplementation("org.springframework.boot:spring-boot-starter-test:${property('spring.version')}") {
 			exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 		}
+		testRuntimeOnly 'org.junit.platform:junit-platform-engine:1.12.2'
+		testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.12.2'
 
 	}
 
@@ -73,12 +75,12 @@ project(':api'){
 		implementation project(":sync-service")
 		implementation project(":persistence-elasticsearch")
 		implementation "org.transactions:common-connector:${property('transaction.version')}"
-		implementation "org.springframework.boot:spring-boot-starter-web"
+		implementation "org.springframework.boot:spring-boot-starter"
 		implementation "org.springframework.boot:spring-boot-starter-data-mongodb"
 		implementation "org.springframework.boot:spring-boot-starter-data-elasticsearch"
 		implementation "org.springframework.boot:spring-boot-starter-actuator"
 
-		implementation platform('org.testcontainers:testcontainers-bom:1.18.3') //import bom
+		implementation platform('org.testcontainers:testcontainers-bom:1.21.2') //import bom
 
 		testImplementation "org.testcontainers:junit-jupiter"
 		testImplementation "org.testcontainers:elasticsearch"
@@ -105,6 +107,6 @@ project (':persistence-elasticsearch') {
 		implementation "org.springframework.boot:spring-boot-starter:${property('spring.version')}"
 		implementation "org.transactions:model:${property('transaction.version')}"
 
-		testImplementation "org.hamcrest:hamcrest-all:${property('hamcrest-all.version')}"
+		testImplementation "org.hamcrest:hamcrest:${property('hamcrest-all.version')}"
 	}
 }
