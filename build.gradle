@@ -21,7 +21,7 @@ allprojects {
 	version = '0.0.1-SNAPSHOT'
 
 	jacoco {
-		toolVersion = '0.8.13'
+		toolVersion = '0.8.14'
 	}
 
 	repositories {
@@ -54,8 +54,8 @@ subprojects {
 		testImplementation("org.springframework.boot:spring-boot-starter-test:${property('spring.version')}") {
 			exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 		}
-		testRuntimeOnly 'org.junit.platform:junit-platform-engine:1.12.2'
-		testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.12.2'
+		testRuntimeOnly 'org.junit.platform:junit-platform-engine:6.0.3'
+		testRuntimeOnly 'org.junit.platform:junit-platform-launcher:6.0.3'
 
 	}
 
@@ -80,7 +80,7 @@ project(':api'){
 		implementation "org.springframework.boot:spring-boot-starter-data-elasticsearch"
 		implementation "org.springframework.boot:spring-boot-starter-actuator"
 
-		implementation platform('org.testcontainers:testcontainers-bom:1.21.2') //import bom
+		implementation platform('org.testcontainers:testcontainers-bom:2.0.3') //import bom
 
 		testImplementation "org.testcontainers:junit-jupiter"
 		testImplementation "org.testcontainers:elasticsearch"
