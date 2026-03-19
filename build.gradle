@@ -76,17 +76,21 @@ project(':api'){
 		implementation project(":persistence-elasticsearch")
 		implementation "org.transactions:common-connector:${property('transaction.version')}"
 		implementation "org.springframework.boot:spring-boot-starter"
+		implementation "org.springframework.boot:spring-boot-starter-data-jpa"
 		implementation "org.springframework.boot:spring-boot-starter-data-mongodb"
 		implementation "org.springframework.boot:spring-boot-starter-data-elasticsearch"
 		implementation "org.springframework.boot:spring-boot-starter-actuator"
+		runtimeOnly "org.postgresql:postgresql:42.7.4"
 
 		implementation platform('org.testcontainers:testcontainers-bom:2.0.3') //import bom
 
 		testImplementation "org.testcontainers:junit-jupiter"
 		testImplementation "org.testcontainers:elasticsearch"
 		testImplementation "org.testcontainers:mongodb"
+		testImplementation "org.testcontainers:testcontainers-postgresql"
 		// For mocking repository
-		testImplementation "org.transactions:persistence-mongodb:${property('transaction.version')}"
+		testImplementation "org.transactions:persistence-mongodb:2.0.0-SNAPSHOT"
+		testImplementation "org.transactions:persistence-postgresql:2.0.0-SNAPSHOT"
 
 	}
 }
@@ -95,7 +99,8 @@ project (':sync-service') {
 	dependencies {
 		implementation "org.springframework.boot:spring-boot-starter:${property('spring.version')}"
 		implementation "org.transactions:common-connector:${property('transaction.version')}"
-		implementation "org.transactions:persistence-mongodb:${property('transaction.version')}"
+		implementation "org.transactions:persistence-mongodb:2.0.0-SNAPSHOT"
+		implementation "org.transactions:persistence-postgresql:2.0.0-SNAPSHOT"
 	}
 }
 
