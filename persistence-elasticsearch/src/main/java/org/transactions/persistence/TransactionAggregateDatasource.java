@@ -2,6 +2,7 @@ package org.transactions.persistence;
 
 import org.model.transactions.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
 import org.springframework.stereotype.Component;
@@ -14,6 +15,7 @@ import org.transactions.sync.connector.ITransactionsAggregateDatasource;
 import java.util.List;
 
 @Component
+@Profile("es")
 public class TransactionAggregateDatasource implements ITransactionsAggregateDatasource {
 
     private TransactionAggregateRepository repository;

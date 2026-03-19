@@ -1,0 +1,17 @@
+server:
+  port: 8080
+
+spring:
+  data:
+    mongodb:
+      host: transactions-mongo-db
+      port: 27017
+      database: transactions
+  elasticsearch:
+    rest:
+      uris: http://transactions-elastic-search:9200
+
+es:
+  index: transactions
+  hostname: transactions-elastic-search:9200
+

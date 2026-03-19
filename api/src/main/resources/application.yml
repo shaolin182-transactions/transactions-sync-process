@@ -1,0 +1,40 @@
+server:
+  port: 8081
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: transactions-java-server
+            client-secret: ${KEYCLOAK_CLIENT_SECRET}
+            authorization-grant-type: client_credentials
+            scope: openid
+        provider:
+          keycloak:
+            token-uri: http://keycloak:8082/auth/realms/transactions
+# TODO : Add to deactivate because bean OAuth2AuthorizedClientManager is not loaded in application context
+#  main:
+#    web-application-type: NONE
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: transactions-dev
+      uri: mongodb://localhost:27017/transactions-dev
+  flyway:
+    enabled: true
+  datasource:
+    url: jdbc:postgresql://localhost:5433/test
+    driver-class-name: org.postgresql.Driver
+    username: test
+    password: test
+  elasticsearch:
+    rest:
+      uris: http://localhost:9200
+
+es:
+  index: transactiondev
+  hostname: localhost:9200
+

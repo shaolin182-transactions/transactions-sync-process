@@ -2,6 +2,7 @@ package org.transactions.sync.impl;
 
 import org.model.transactions.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.transactions.connector.ITransactionsReadOnlyDatasource;
 import org.transactions.sync.ISyncService;
@@ -9,8 +10,9 @@ import org.transactions.sync.connector.ITransactionsAggregateDatasource;
 
 import java.util.List;
 
+@Profile("mongo-to-es")
 @Service
-public class SyncService implements ISyncService {
+public class FromMongoToEsSyncService implements ISyncService {
 
     ITransactionsAggregateDatasource aggregateDatasource;
 
@@ -18,7 +20,7 @@ public class SyncService implements ISyncService {
 
 
     @Autowired
-    public SyncService(ITransactionsReadOnlyDatasource readOnlyDatasource, ITransactionsAggregateDatasource aggregateDatasource){
+    public FromMongoToEsSyncService(ITransactionsReadOnlyDatasource readOnlyDatasource, ITransactionsAggregateDatasource aggregateDatasource){
         this.aggregateDatasource = aggregateDatasource;
         this.transactionsDatasource = readOnlyDatasource;
     }
