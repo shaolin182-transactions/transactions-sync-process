@@ -49,11 +49,7 @@
                     "label" : "Cadeaux",
                     "type": "EXTRA"
                 },
-                "bankAccount" : {
-                    "id": 2,
-                    "category" : "category 2A",
-                    "label" : "label bank account 2A"
-                },
+                "bankAccount": { "id": 21, "category": "Commun", "label": "CMB" },
                 "income" : 2,
                 "outcome": 0
             }
@@ -113,5 +109,292 @@
         ],
         "cost" : 900,
         "costAbs" : 900
+    },
+    {
+        "id": "5f2c159c7602f27ba0113329",
+        "transactions": [
+            {
+                "category": {
+                    "id": 45,
+                    "category": "Impôts & Taxes",
+                    "label": "Impôts sur le revenu",
+                    "type": "FIXE"
+                },
+                "income": 708,
+                "outcome": 0,
+                "bankAccount": { "id": 21, "category": "Commun", "label": "CMB" }
+            },
+            {
+                "category": { "id": 66, "category": "Revenu", "label": "Vir Externe" },
+                "income": 200,
+                "outcome": 0,
+                "bankAccount": { "id": 21, "category": "Commun", "label": "CMB" }
+            }
+        ],
+        "cost": 90800,
+        "costAbs": 90800,
+        "type": "INCOME"
+    },
+    {
+        "id": "5f2c159c7602f27ba01133e3",
+        "transactions": [
+            {
+                "category": {
+                    "id": 17,
+                    "category": "Autres",
+                    "label": "Cadeaux",
+                    "type": "EXTRA"
+                },
+                "income": 0,
+                "outcome": 39.95000076293945,
+                "bankAccount": { "id": 21, "category": "Commun", "label": "CMB" }
+            },
+            {
+                "category": {
+                    "id": 14,
+                    "category": "Alimentaire",
+                    "label": "Supermarché",
+                    "type": "COURANTE"
+                },
+                "income": 0,
+                "outcome": 35.16999816894531,
+                "bankAccount": { "id": 21, "category": "Commun", "label": "CMB" }
+            }
+        ],
+        "cost": -7512,
+        "costAbs": 7512,
+        "type": "OUTCOME"
+    },
+    {
+        "id": "5f2c159d7602f27ba011351b",
+        "transactions": [
+            {
+                "category": {
+                    "id": 41,
+                    "category": "Loisir",
+                    "label": "Photographie",
+                    "type": "EXTRA"
+                },
+                "income": 0,
+                "outcome": 59.9900016784668,
+                "bankAccount": { "id": 26, "category": "Perso", "label": "ING Direct" }
+            },
+            {
+                "category": {
+                    "id": 17,
+                    "category": "Autres",
+                    "label": "Cadeaux",
+                    "type": "EXTRA"
+                },
+                "income": 0,
+                "outcome": 44.900001525878906,
+                "bankAccount": { "id": 26, "category": "Perso", "label": "ING Direct" }
+            }
+        ],
+        "cost": -10489,
+        "costAbs": 10489,
+        "type": "OUTCOME"
+    },
+    {
+        "id": "5f2c159d7602f27ba011351e",
+        "transactions": [
+            {
+                "category": {
+                    "id": 17,
+                    "category": "Autres",
+                    "label": "Cadeaux",
+                    "type": "EXTRA"
+                },
+                "income": 0,
+                "outcome": 17.479999542236328,
+                "bankAccount": { "id": 21, "category": "Commun", "label": "CMB" }
+            },
+            {
+                "category": {
+                    "id": 15,
+                    "category": "Maison",
+                    "label": "Divers",
+                    "type": "COURANTE"
+                },
+                "income": 0,
+                "outcome": 41.470001220703125,
+                "bankAccount": { "id": 21, "category": "Commun", "label": "CMB" }
+            }
+        ],
+        "cost": -5895,
+        "costAbs": 5895,
+        "type": "OUTCOME"
+    },
+    {
+        "id": "5f2c159d7602f27ba0113590",
+        "transactions": [
+            {
+                "category": {
+                    "id": 70,
+                    "category": "Vacances",
+                    "label": "2018 - Dordogne",
+                    "type": "EXTRA"
+                },
+                "income": 142.85000610351562,
+                "outcome": 0,
+                "bankAccount": { "id": 21, "category": "Commun", "label": "CMB" }
+            },
+            {
+                "category": {
+                    "id": 27,
+                    "category": "Loisir",
+                    "label": "Sorties",
+                    "type": "EXTRA"
+                },
+                "income": 0,
+                "outcome": 14,
+                "bankAccount": { "id": 21, "category": "Commun", "label": "CMB" }
+            },
+            {
+                "category": {
+                    "id": 26,
+                    "category": "Alimentaire",
+                    "label": "Restaurant",
+                    "type": "COURANTE"
+                },
+                "income": 0,
+                "outcome": 32.20000076293945,
+                "bankAccount": { "id": 21, "category": "Commun", "label": "CMB" }
+            },
+            {
+                "category": {
+                    "id": 14,
+                    "category": "Alimentaire",
+                    "label": "Supermarché",
+                    "type": "COURANTE"
+                },
+                "income": 0,
+                "outcome": 37.5,
+                "bankAccount": { "id": 21, "category": "Commun", "label": "CMB" }
+            }
+        ],
+        "cost": 5915,
+        "costAbs": 5915,
+        "type": "INCOME"
+    },
+    {
+        "id": "5f2c159d7602f27ba0113756",
+        "transactions": [
+            {
+                "category": {
+                    "id": 63,
+                    "category": "Vacances",
+                    "label": "2017 - Sud France",
+                    "type": "EXTRA"
+                },
+                "income": 0,
+                "outcome": 337.5,
+                "bankAccount": { "id": 26, "category": "Perso", "label": "ING Direct" }
+            },
+            {
+                "category": {
+                    "id": 25,
+                    "category": "Maison",
+                    "label": "Meuble/Electroménager",
+                    "type": "COURANTE"
+                },
+                "income": 0,
+                "outcome": 75,
+                "bankAccount": { "id": 26, "category": "Perso", "label": "ING Direct" }
+            },
+            {
+                "category": {
+                    "id": 27,
+                    "category": "Loisir",
+                    "label": "Sorties",
+                    "type": "EXTRA"
+                },
+                "income": 69,
+                "outcome": 0,
+                "bankAccount": { "id": 26, "category": "Perso", "label": "ING Direct" }
+            },
+            {
+                "category": {
+                    "id": 13,
+                    "category": "Loisir",
+                    "label": "Jeux d'argent",
+                    "type": "EXTRA"
+                },
+                "income": 50,
+                "outcome": 0,
+                "bankAccount": { "id": 26, "category": "Perso", "label": "ING Direct" }
+            },
+            {
+                "category": { "id": 40, "category": "Loisir", "label": "PC", "type": "EXTRA" },
+                "income": 27.5,
+                "outcome": 0,
+                "bankAccount": { "id": 26, "category": "Perso", "label": "ING Direct" }
+            }
+        ],
+        "cost": -26600,
+        "costAbs": 26600,
+        "type": "OUTCOME"
+    },
+    {
+        "id": "5fd4dcde3994ef0216f15e99",
+        "transactions": [
+            {
+                "category": {
+                    "id": 15,
+                    "category": "Maison",
+                    "label": "Divers",
+                    "type": "COURANTE"
+                },
+                "income": 124,
+                "outcome": 0,
+                "description": "",
+                "bankAccount": { "id": 26, "category": "Perso", "label": "ING Direct" },
+                "cost": 12400,
+                "costAbs": 12400
+            },
+            {
+                "category": { "id": 42, "category": "Loisir", "label": "Sport", "type": "EXTRA" },
+                "income": 0,
+                "outcome": 51.310001373291016,
+                "description": "",
+                "bankAccount": { "id": 26, "category": "Perso", "label": "ING Direct" },
+                "cost": -5131,
+                "costAbs": 5131
+            }
+        ],
+        "cost": 7269,
+        "costAbs": 7269,
+        "type": "INCOME"
+    },
+    {
+        "id": "5fd71fc653a5ca0b423e05f9",
+        "transactions": [
+            {
+                "category": {
+                    "id": 15,
+                    "category": "Maison",
+                    "label": "Divers",
+                    "type": "COURANTE"
+                },
+                "income": 0,
+                "outcome": 124,
+                "description": "",
+                "bankAccount": { "id": 21, "category": "Commun", "label": "CMB" },
+                "cost": -12400,
+                "costAbs": 12400
+            },
+            {
+                "category": { "id": 42, "category": "Loisir", "label": "Sport", "type": "EXTRA" },
+                "income": 51.310001373291016,
+                "outcome": 0,
+                "description": "",
+                "bankAccount": { "id": 21, "category": "Commun", "label": "CMB" },
+                "cost": 5131,
+                "costAbs": 5131
+            }
+        ],
+        "cost": -7269,
+        "costAbs": 7269,
+        "type": "OUTCOME"
     }
 ]
