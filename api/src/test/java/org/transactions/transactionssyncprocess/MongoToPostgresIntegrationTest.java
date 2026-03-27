@@ -2,6 +2,7 @@ package org.transactions.transactionssyncprocess;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.*;
 import org.model.transactions.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +72,7 @@ public class MongoToPostgresIntegrationTest {
     @Test
     @Tag("IntegrationTest")
     @DisplayName("Records existing in mongo database should be exported into ES database")
+    @Transactional
     void nominalCase() throws Exception {
         // Prepare Data - Insert Data into mongodb database
 

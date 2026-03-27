@@ -27,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Testcontainers
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ActiveProfiles({"test", "mongo-to-es"})
+@ActiveProfiles({"test", "mongo-to-es", "mongodb", "es"})
 public class MongoToESIntegrationTest {
 
     @Container

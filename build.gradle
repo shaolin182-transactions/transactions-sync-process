@@ -99,8 +99,8 @@ project (':sync-service') {
 	dependencies {
 		implementation "org.springframework.boot:spring-boot-starter:${property('spring.version')}"
 		implementation "org.transactions:common-connector:${property('transaction.version')}"
-		implementation "org.transactions:persistence-mongodb:2.0.0-SNAPSHOT"
-		implementation "org.transactions:persistence-postgresql:2.0.0-SNAPSHOT"
+		implementation "org.transactions:persistence-mongodb:${property('transaction.version')}"
+		implementation "org.transactions:persistence-postgresql:${property('transaction.version')}"
 	}
 }
 
