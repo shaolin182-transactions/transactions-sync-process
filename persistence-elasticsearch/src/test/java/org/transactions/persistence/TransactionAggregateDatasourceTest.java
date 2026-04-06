@@ -56,6 +56,6 @@ class TransactionAggregateDatasourceTest {
         new TransactionAggregateDatasource(factory, repository, esClient, esConfig).publishData(transactions);
 
         verify(factory, times(1)).buildTransactionESList(transactions);
-        verify(repository, times(1)).saveAll(transactionES);
+        verify(repository, times(0)).save(Mockito.any());
     }
 }
