@@ -43,7 +43,10 @@ public class TransactionAggregateDatasource implements ITransactionsAggregateDat
         if (!clientES.indexOps(IndexCoordinates.of(esConfig.getIndex())).exists()){
             clientES.indexOps(IndexCoordinates.of(esConfig.getIndex())).create();
         }
-        repository.saveAll(transactionsToPublish);
+
+        for (TransactionES transaction : transactionsToPublish) {
+            repository.save(transaction);
+        }
 
     }
 
