@@ -47,7 +47,9 @@ public class FromMongoToPgSyncService implements ISyncService {
         // Extract categories and persist them
         for ( Transaction transaction : transactions){
             for (var subTransaction : transaction.getTransactions()){
-                commonDataDatasource.saveCategory(subTransaction.getCategory());
+                if (subTransaction.getCategory() != null){
+                    commonDataDatasource.saveCategory(subTransaction.getCategory());
+                }
             }
         }
 
