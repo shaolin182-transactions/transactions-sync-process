@@ -1,6 +1,8 @@
 package org.transactions.sync.impl;
 
 import org.model.transactions.Transaction;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Profile;
@@ -16,6 +18,7 @@ import java.util.List;
 @Profile("mongo-to-pg")
 public class FromMongoToPgSyncService implements ISyncService {
 
+    private static final Logger log = LoggerFactory.getLogger(FromMongoToPgSyncService.class);
     private final ITransactionsReadOnlyDatasource transactionsDatasource;
 
     private final ITransactionDataSource targetDatasource;
@@ -55,7 +58,12 @@ public class FromMongoToPgSyncService implements ISyncService {
 
         for ( Transaction transaction : transactions){
             // Convert MongoDB data to Postgres format and publish to Postgres datasource
-            targetDatasource.saveTransactions(transaction);
+            try {
+                targetDatasource.saveTransactions(transaction);
+            } catch (Exception e){
+                log.atError().setCause(e)
+                    .log("Error while saving transaction with id {} to Postgres datasource", transaction.getId());
+            }
         }
     }
 }
