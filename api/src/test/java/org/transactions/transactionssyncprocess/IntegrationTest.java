@@ -62,6 +62,7 @@ public class IntegrationTest {
     @BeforeEach
     void testIsContainerRunning() {
         assertTrue(esContainer.isRunning());
+        assertTrue(mongoDbContainer.isRunning());
         recreateIndex();
         emptyDb();
     }
