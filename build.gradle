@@ -82,9 +82,9 @@ project(':api'){
 
 		implementation platform('org.testcontainers:testcontainers-bom:2.0.3') //import bom
 
-		testImplementation "org.testcontainers:junit-jupiter"
-		testImplementation "org.testcontainers:elasticsearch"
-		testImplementation "org.testcontainers:mongodb"
+		testImplementation "org.testcontainers:testcontainers-junit-jupiter"
+		testImplementation "org.testcontainers:testcontainers-elasticsearch"
+		testImplementation "org.testcontainers:testcontainers-mongodb"
 		// For mocking repository
 		testImplementation "org.transactions:persistence-mongodb:${property('transaction.version')}"
 
