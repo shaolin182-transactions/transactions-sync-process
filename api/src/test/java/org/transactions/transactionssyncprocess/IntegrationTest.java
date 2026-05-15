@@ -2,6 +2,7 @@ package org.transactions.transactionssyncprocess;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import org.junit.jupiter.api.*;
 import org.model.transactions.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
+import org.springframework.data.elasticsearch.core.IndexOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.test.context.ActiveProfiles;
 import org.testcontainers.junit.jupiter.Container;
@@ -38,8 +40,7 @@ public class IntegrationTest {
 
     private static ResourceLoader resourceLoader = new DefaultResourceLoader();
 
-    @Autowired
-    private ObjectMapper mapper;
+    private ObjectMapper mapper = new JsonMapper();
 
     @Autowired
     private MongoTemplate mongoTemplate;
