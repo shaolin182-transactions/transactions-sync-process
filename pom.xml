@@ -50,6 +50,10 @@
         <sonar.jacoco.reportPaths>${project.build.directory}/site/jacoco/jacoco.xml</sonar.jacoco.reportPaths>
     </properties>
 
+    <scm>
+        <developerConnection>scm:git:https://github.com/shaolin182-transactions/transactions-sync-process.git</developerConnection>
+    </scm>
+
     <repositories>
         <repository>
             <id>central</id>
