@@ -198,5 +198,13 @@
             </properties>
         </profile>
     </profiles>
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub Transactions</name>
+            <url>https://maven.pkg.github.com/shaolin182-transactions/transactions-sync-process</url>
+        </repository>
+    </distributionManagement>
 </project>
 
