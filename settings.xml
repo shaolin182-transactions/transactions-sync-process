@@ -1,0 +1,9 @@
+<settings>
+    <servers>
+        <server>
+            <id>github</id> <!-- Doit correspondre à l'id dans le pom.xml -->
+            <username>girard.julien@gmail.com</username>
+            <password>${GITHUB_TOKEN}</password> <!-- Utilise une variable d'environnement -->
+        </server>
+    </servers>
+</settings>
