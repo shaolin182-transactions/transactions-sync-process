@@ -19,7 +19,7 @@ import java.util.List;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureStubRunner(
         ids = "org.transactions:server:1.5.0-RC5:stubs",
-        stubsMode = StubRunnerProperties.StubsMode.LOCAL,
+        stubsMode = StubRunnerProperties.StubsMode.CLASSPATH,
         minPort = 8080, maxPort = 8080
 )
 public class TransactionRestClientTest {
