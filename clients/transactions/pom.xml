@@ -55,7 +55,7 @@
         <dependency>
             <groupId>org.transactions</groupId>
             <artifactId>server</artifactId>
-            <version>1.5.0-RC5</version>
+            <version>${transaction.version}</version>
             <classifier>stubs</classifier>
             <scope>test</scope>
             <exclusions>

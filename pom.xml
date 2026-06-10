@@ -31,7 +31,7 @@
 
         <!-- Custom versions -->
         <hamcrest-all.version>3.0</hamcrest-all.version>
-        <transaction.version>1.5.0-RC4</transaction.version>
+        <transaction.version>1.5.0-RC6</transaction.version>
         <testlogger.version>4.0.0</testlogger.version>
         <sonar-maven-plugin.version>3.9.1.2184</sonar-maven-plugin.version>
 
