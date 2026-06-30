@@ -1,4 +1,4 @@
-FROM gradle:8.13.0-jdk21-alpine AS build
+FROM maven:3.9.16-eclipse-temurin-21 AS build
 
 ARG USER
 ARG PASSWORD
@@ -9,16 +9,15 @@ ENV GITHUB_TOKEN=$PASSWORD
 RUN mkdir -p /workspace
 WORKDIR /workspace
 COPY . /workspace
-RUN chmod +x gradlew
-RUN ./gradlew --no-daemon build -x test
+
+RUN mvn -B -f pom.xml clean package -DskipTests
 
 FROM eclipse-temurin:21-alpine
 
 ENV TARGET_ENV=dev
-ENV CONFIG_LOCATION=/etc/config/application.properties
+ENV CONFIG_LOCATION=/etc/config/application.yaml
 
-COPY api/src/main/resources/application.properties /etc/config/application.properties
-COPY --from=build /workspace/api/build/libs/*.jar app.jar
+COPY --from=build /workspace/api/target/*.jar app.jar
 
 EXPOSE 8080
 ENTRYPOINT ["java","-DenvTarget=${TARGET_ENV}", "-jar","/app.jar", "--spring.config.location=${CONFIG_LOCATION}"]

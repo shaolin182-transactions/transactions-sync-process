@@ -14,7 +14,7 @@ spring:
         provider:
           keycloak:
             token-uri: http://keycloak:8082/auth/realms/transactions
-# TODO : Add to deactivate because bean OAuth2AuthorizedClientManager is not loaded in application context
+# TODO : Add to comment because bean OAuth2AuthorizedClientManager is not loaded in application context
 #  main:
 #    web-application-type: NONE
   data:
