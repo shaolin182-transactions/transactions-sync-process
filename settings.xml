@@ -2,7 +2,7 @@
     <servers>
         <server>
             <id>github</id> <!-- Doit correspondre à l'id dans le pom.xml -->
-            <username>girard.julien@gmail.com</username>
+            <username>${GITHUB_USERNAME}</username>
             <password>${GITHUB_TOKEN}</password> <!-- Utilise une variable d'environnement -->
         </server>
     </servers>

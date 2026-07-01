@@ -23,7 +23,7 @@ jobs:
         id: vars
         run: echo ::set-output name=tag::$(echo ${GITHUB_REF:10})
       - name: Build image
-        run: docker build . --file Dockerfile --build-arg USER=${GITHUB_USERNAME} --build-arg PASSWORD=${GITHUB_TOKEN} --tag jugirard/transactions-sync-process:${{steps.vars.outputs.tag}} --tag jugirard/transactions-sync-process:latest
+        run: docker build --secret id=github_token,env=GITHUB_TOKEN --secret id=github_username,env=GITHUB_USERNAME . --file Dockerfile --tag jugirard/transactions-sync-process:${{steps.vars.outputs.tag}} --tag jugirard/transactions-sync-process:latest
         env:
           GITHUB_USERNAME: ${{ github.actor }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
