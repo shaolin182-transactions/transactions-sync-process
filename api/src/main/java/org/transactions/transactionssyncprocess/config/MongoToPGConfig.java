@@ -6,8 +6,8 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
-@EnableJpaRepositories("org.transactions.persistence.pg.repositories")
-@EntityScan("org.transactions.persistence.pg.entities")
+@EnableJpaRepositories("org.transactions.sync.repositories")
+@EntityScan("org.transactions.sync.entities")
 @Profile("mongo-to-pg")
 public class MongoToPGConfig {
 }

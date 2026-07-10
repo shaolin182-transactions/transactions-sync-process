@@ -33,6 +33,7 @@
         <dependency>
             <groupId>org.transactions</groupId>
             <artifactId>persistence-postgresql</artifactId>
+            <scope>test</scope>
             <version>${transaction.version}</version>
         </dependency>
         <dependency>
