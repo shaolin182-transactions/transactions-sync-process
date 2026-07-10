@@ -1,7 +1,12 @@
+logging:
+  level:
+    root: TRACE
 server:
   port: 8081
 
 spring:
+  profiles:
+    active: mongo-to-pg,postgresql,mongodb
   security:
     oauth2:
       client:
@@ -22,15 +27,15 @@ spring:
       host: localhost
       port: 27017
       database: transactions-dev
-      uri: mongodb://localhost:27017/transactions-dev
+      uri: mongodb://sync-dev-transactions-mongo-db-6:27017/transactions-staging
   flyway:
     enabled: true
     locations: classpath:db/migration/sync
   datasource:
-    url: jdbc:postgresql://localhost:5433/test
+    url: jdbc:postgresql://dev-transactions-sync-postgresqL:5432/postgres
     driver-class-name: org.postgresql.Driver
-    username: test
-    password: test
+    username: postgres
+    password: ${POSTGRES_PASSWORD} 
   elasticsearch:
     rest:
       uris: http://localhost:9200

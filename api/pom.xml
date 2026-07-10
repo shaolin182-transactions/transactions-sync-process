@@ -81,20 +81,9 @@
             <artifactId>testcontainers-postgresql</artifactId>
             <scope>test</scope>
         </dependency>
-
-        <!-- For mocking repository -->
         <dependency>
-            <groupId>org.transactions</groupId>
-            <artifactId>persistence-mongodb</artifactId>
-            <version>${transaction.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.transactions</groupId>
-            <artifactId>persistence-postgresql</artifactId>
-            <version>${transaction.version}</version>
-            <scope>test</scope>
+            <groupId>org.wiremock</groupId>
+            <artifactId>wiremock-standalone</artifactId>
         </dependency>
     </dependencies>
 
@@ -119,6 +108,23 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>**/**IntegrationTest.java</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <configuration>
+                    <includes>
+                        <include>%regex[.*IntegrationTest.*]</include>
+                    </includes>
                 </configuration>
             </plugin>
         </plugins>

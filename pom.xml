@@ -32,12 +32,16 @@
         <!-- Custom versions -->
         <hamcrest-all.version>3.0</hamcrest-all.version>
         <transaction.version>1.5.0-RC6</transaction.version>
-        <testlogger.version>4.0.0</testlogger.version>
         <sonar-maven-plugin.version>3.9.1.2184</sonar-maven-plugin.version>
+        <mapstruct.version>1.6.3</mapstruct.version>
 
         <!-- Testing -->
         <testcontainers.version>2.0.3</testcontainers.version>
         <junit-platform.version>6.0.3</junit-platform.version>
+        <testcontainer-junit-jupiter.version>1.21.4</testcontainer-junit-jupiter.version>
+        <wiremock-standalone.version>3.13.2</wiremock-standalone.version>
+        <spring-cloud-contract-stub-runner.version>5.0.2</spring-cloud-contract-stub-runner.version>
+        <rest-assured.version>6.0.0</rest-assured.version>
 
         <!-- JaCoCo -->
         <jacoco-maven-plugin.version>0.8.14</jacoco-maven-plugin.version>
@@ -50,8 +54,8 @@
 
     <scm>
         <developerConnection>scm:git:https://github.com/shaolin182-transactions/transactions-sync-process.git</developerConnection>
-      <tag>transactions-sync-process-1.0.2-RC1</tag>
-  </scm>
+          <tag>transactions-sync-process-1.0.2-RC1</tag>
+      </scm>
 
     <repositories>
         <repository>
@@ -77,6 +81,34 @@
                 <version>${testcontainers.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>junit-jupiter</artifactId>
+                <version>${testcontainer-junit-jupiter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wiremock</groupId>
+                <artifactId>wiremock-standalone</artifactId>
+                <version>${wiremock-standalone.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-contract-stub-runner</artifactId>
+                <version>${spring-cloud-contract-stub-runner.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.rest-assured</groupId>
+                <artifactId>rest-assured</artifactId>
+                <version>${rest-assured.version}</version>
+                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

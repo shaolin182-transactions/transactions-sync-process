@@ -16,3 +16,10 @@ services:
       discovery.type: single-node
       cluster.name: elasticsearch
       xpack.security.enabled: false
+
+  postgres:
+    container_name: dev-transactions-sync-postgresql
+    image: dhi.io/postgres:18.1-alpine3.22-dev
+    ports:
+      - "5432:5432"
+    env_file: "app.env"

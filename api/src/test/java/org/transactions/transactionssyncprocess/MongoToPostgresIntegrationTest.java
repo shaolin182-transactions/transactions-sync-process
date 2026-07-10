@@ -3,11 +3,13 @@ package org.transactions.transactionssyncprocess;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.github.tomakehurst.wiremock.client.WireMock;
+import com.github.tomakehurst.wiremock.junit5.WireMockExtension;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.RegisterExtension;
 import org.model.transactions.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
@@ -16,7 +18,6 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.test.context.ActiveProfiles;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
-import org.transactions.connector.ITransactionDataSource;
 import org.transactions.transactionssyncprocess.service.AppStartService;
 import org.transactions.transactionssyncprocess.utils.TransactionsMongoDbContainer;
 import org.transactions.transactionssyncprocess.utils.TransactionsPostgresContainer;
@@ -24,6 +25,7 @@ import org.transactions.transactionssyncprocess.utils.TransactionsPostgresContai
 import java.io.IOException;
 import java.util.List;
 
+import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Testcontainers
@@ -46,10 +48,11 @@ public class MongoToPostgresIntegrationTest {
     @Autowired
     private MongoTemplate mongoTemplate;
 
+    @RegisterExtension
+    static WireMockExtension wmServer = WireMockExtension.newInstance()
+            .options(wireMockConfig().port(8080))
+            .build();
 
-    @Autowired
-    @Qualifier("postgresDatasource")
-    private ITransactionDataSource transactionDataSource;
 
     @Autowired
     AppStartService startService;
@@ -81,12 +84,14 @@ public class MongoToPostgresIntegrationTest {
         // Get sample JSON file
         loadTransactionsInBDD();
 
+        // Mock transactions api server
+        wmServer.stubFor(WireMock.post("/transactions").willReturn(WireMock.aResponse().withStatus(200)));
+
         // Run sync service
         startService.start();
 
-        // Assertions - records must exist in ES database
-        List<Transaction> result = transactionDataSource.getAllTransactions();
-        Assertions.assertEquals(10, result.size());
+        // Assertions - Transactions REST client should have been called 10 times
+        WireMock.verify(10, WireMock.postRequestedFor(WireMock.urlEqualTo("/transactions")));
 
     }
 
