@@ -42,6 +42,8 @@ public class TransactionRestClientConfig {
 
     @Bean
     public OAuth2ClientHttpRequestInterceptor oauth2Interceptor(OAuth2AuthorizedClientManager authorizedClientManager) {
-        return new OAuth2ClientHttpRequestInterceptor(authorizedClientManager);
+        var oAuth2ClientHttpRequestInterceptor = new OAuth2ClientHttpRequestInterceptor(authorizedClientManager);
+        oAuth2ClientHttpRequestInterceptor.setClientRegistrationIdResolver(request -> "keycloak");
+        return oAuth2ClientHttpRequestInterceptor;
     }
 }

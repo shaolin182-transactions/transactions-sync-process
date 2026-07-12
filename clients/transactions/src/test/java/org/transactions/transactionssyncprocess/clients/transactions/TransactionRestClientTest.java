@@ -1,8 +1,12 @@
 package org.transactions.transactionssyncprocess.clients.transactions;
 
+import com.github.tomakehurst.wiremock.client.WireMock;
+import com.github.tomakehurst.wiremock.junit5.WireMockExtension;
 import com.github.tomakehurst.wiremock.junit5.WireMockRuntimeInfo;
+import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cloud.contract.stubrunner.spring.AutoConfigureStubRunner;
@@ -16,7 +20,9 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
+
+@SpringBootTest
 @AutoConfigureStubRunner(
         ids = "org.transactions:server:1.5.0-RC5:stubs",
         stubsMode = StubRunnerProperties.StubsMode.CLASSPATH,
@@ -27,8 +33,27 @@ public class TransactionRestClientTest {
     @Autowired
     TransactionRestClient client;
 
+    @RegisterExtension
+    static WireMockExtension wmServer = WireMockExtension.newInstance()
+            .options(wireMockConfig().port(8084))
+            .build();
+
     @Test
     public void createTransaction() {
+
+        wmServer.stubFor(WireMock.post(WireMock.urlEqualTo("/auth/realms/transactions")).willReturn(
+                WireMock.aResponse()
+                        .withStatus(HttpStatus.SC_OK)
+                        .withHeader("Content-Type", "application/json")
+                        .withBody("""
+                                {
+                                    "access_token": "token",
+                                    "scope":"openid",
+                                    "token_type": "bearer",
+                                    "expires_in": 3600
+                                }
+                                """)
+        ));
 
         var details = new TransactionDetail()
                 .bankAccount(new BankAccount().id(1l).category("BK").label("BKLABEL"))
