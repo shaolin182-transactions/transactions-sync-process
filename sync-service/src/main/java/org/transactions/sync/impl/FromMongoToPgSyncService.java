@@ -84,6 +84,8 @@ public class FromMongoToPgSyncService implements ISyncService {
 
         // Persist data
         history.setMigrationData(dataMigrated);
+        history.setNbRecordMigrated(Long.valueOf(dataMigrated.size()));
+        history.setDuration(OffsetDateTime.now().toEpochSecond() - history.getDate().toEpochSecond());
         historyRepo.save(history);
     }
 }
