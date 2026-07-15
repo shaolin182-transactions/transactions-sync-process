@@ -14,10 +14,10 @@ import org.transactions.clients.transactions.api.TransactionsApi;
 public class TransactionRestClientConfig {
 
     @ConfigurationProperties(prefix = "client.transactions")
-    @Bean
+    @Bean("client-transactions-config")
     public RestClientProperties restClientProperties(){
         return new RestClientProperties();
-    };
+    }
 
     @Bean
     public TransactionsApi transactionsApi(ApiClient client) {
@@ -27,7 +27,7 @@ public class TransactionRestClientConfig {
     }
 
     @Bean
-    public ApiClient apiClient(@Qualifier("restClientTransaction") RestClient restClient, RestClientProperties clientProperties) {
+    public ApiClient apiClient(@Qualifier("restClientTransaction") RestClient restClient, @Qualifier("client-transactions-config") RestClientProperties clientProperties) {
         var client = new ApiClient(restClient);
         client.setBasePath(clientProperties.getBaseUrl());
         return client;

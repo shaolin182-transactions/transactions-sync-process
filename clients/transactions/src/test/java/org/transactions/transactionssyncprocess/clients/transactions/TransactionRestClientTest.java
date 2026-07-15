@@ -35,7 +35,12 @@ public class TransactionRestClientTest {
 
     @RegisterExtension
     static WireMockExtension wmServer = WireMockExtension.newInstance()
-            .options(wireMockConfig().port(8084))
+            .options(
+                    wireMockConfig().port(8084).httpsPort(8444)
+                            .keystorePassword("password")
+                            .keystoreType("PKCS12")
+                            .keystorePath("src/test/resources/wiremock.p12")
+            )
             .build();
 
     @Test

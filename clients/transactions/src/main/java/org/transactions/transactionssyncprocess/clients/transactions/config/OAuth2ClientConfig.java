@@ -1,10 +1,21 @@
 package org.transactions.transactionssyncprocess.clients.transactions.config;
 
+import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
+import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManagerBuilder;
+import org.apache.hc.client5.http.ssl.DefaultClientTlsStrategy;
+import org.apache.hc.client5.http.ssl.NoopHostnameVerifier;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.restclient.autoconfigure.RestClientSsl;
+import org.springframework.boot.ssl.SslBundles;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.converter.FormHttpMessageConverter;
-import org.springframework.security.oauth2.client.*;
+import org.springframework.security.oauth2.client.AuthorizedClientServiceOAuth2AuthorizedClientManager;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClientManager;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClientProviderBuilder;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.endpoint.OAuth2AccessTokenResponseClient;
 import org.springframework.security.oauth2.client.endpoint.OAuth2ClientCredentialsGrantRequest;
 import org.springframework.security.oauth2.client.endpoint.RestClientClientCredentialsTokenResponseClient;
@@ -16,21 +27,45 @@ import org.springframework.web.client.RestClient;
 @Configuration
 public class OAuth2ClientConfig {
 
+    @ConfigurationProperties(prefix = "client.oauth2")
+    @Bean("client-oauth2-config")
+    public RestClientProperties restClientProperties(){
+        return new RestClientProperties();
+    }
+
     @Bean("oAuth2RestClient")
-    public RestClient oauth2RestClient(RestClient.Builder builder){
-        return builder
-                .configureMessageConverters(converters -> {
-                    converters.addCustomConverter(new FormHttpMessageConverter());
-                    converters.addCustomConverter(new OAuth2AccessTokenResponseHttpMessageConverter());
-                })
-                .defaultStatusHandler(new OAuth2ErrorResponseErrorHandler())
-                .build();
+    public RestClient oauth2RestClient(RestClient.Builder builder, RestClientSsl ssl, @Qualifier("client-oauth2-config") RestClientProperties config){
+         builder
+            .configureMessageConverters(converters -> {
+                converters.addCustomConverter(new FormHttpMessageConverter());
+                converters.addCustomConverter(new OAuth2AccessTokenResponseHttpMessageConverter());
+            })
+            .defaultStatusHandler(new OAuth2ErrorResponseErrorHandler());
+
+         if (ssl != null && ssl.fromBundle(config.getSslBundleName()) != null){
+             builder.apply(ssl.fromBundle(config.getSslBundleName()));
+//             var sslContext = ssl.getBundle(config.getSslBundleName()).createSslContext();
+//             var tlsSocketStrategy = new DefaultClientTlsStrategy(sslContext, NoopHostnameVerifier.INSTANCE);
+//             var cnxManager = PoolingHttpClientConnectionManagerBuilder.create()
+//                     .setTlsSocketStrategy(tlsSocketStrategy)
+//                     .build();
+//             var httpClient = HttpClientBuilder.create().setConnectionManager(cnxManager).useSystemProperties().build();
+//             var reqFactory = new HttpComponentsClientHttpRequestFactory(httpClient);
+//             builder.requestFactory(reqFactory);
+         }
+
+        return builder.build();
     }
 
     @Bean
-    OAuth2AuthorizedClientManager authorizedClientManager(ClientRegistrationRepository clientRegistrationRepository, OAuth2AuthorizedClientService authorizedClientService) {
+    OAuth2AuthorizedClientManager authorizedClientManager(ClientRegistrationRepository clientRegistrationRepository, OAuth2AuthorizedClientService authorizedClientService, @Qualifier("oAuth2RestClient") RestClient restClient) {
 
-        var provider = OAuth2AuthorizedClientProviderBuilder.builder().clientCredentials().build();
+        var tokenResponseClient = new RestClientClientCredentialsTokenResponseClient();
+        tokenResponseClient.setRestClient(restClient);
+
+        var provider = OAuth2AuthorizedClientProviderBuilder.builder()
+                .clientCredentials(clientCredentialsGrantBuilder -> clientCredentialsGrantBuilder.accessTokenResponseClient(tokenResponseClient))
+                .build();
 
         var manager = new AuthorizedClientServiceOAuth2AuthorizedClientManager(clientRegistrationRepository, authorizedClientService);
         manager.setAuthorizedClientProvider(provider);
