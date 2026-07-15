@@ -42,3 +42,5 @@ es:
 client:
   transactions:
     base-url: http://localhost:8080
+
+  oauth2:

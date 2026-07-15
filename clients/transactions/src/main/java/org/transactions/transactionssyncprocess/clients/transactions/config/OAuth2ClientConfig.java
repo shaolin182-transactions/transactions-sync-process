@@ -22,6 +22,7 @@ import org.springframework.security.oauth2.client.endpoint.RestClientClientCrede
 import org.springframework.security.oauth2.client.http.OAuth2ErrorResponseErrorHandler;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.core.http.converter.OAuth2AccessTokenResponseHttpMessageConverter;
+import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestClient;
 
 @Configuration
@@ -42,16 +43,8 @@ public class OAuth2ClientConfig {
             })
             .defaultStatusHandler(new OAuth2ErrorResponseErrorHandler());
 
-         if (ssl != null && ssl.fromBundle(config.getSslBundleName()) != null){
+         if (ssl != null && StringUtils.hasText(config.getSslBundleName())){
              builder.apply(ssl.fromBundle(config.getSslBundleName()));
-//             var sslContext = ssl.getBundle(config.getSslBundleName()).createSslContext();
-//             var tlsSocketStrategy = new DefaultClientTlsStrategy(sslContext, NoopHostnameVerifier.INSTANCE);
-//             var cnxManager = PoolingHttpClientConnectionManagerBuilder.create()
-//                     .setTlsSocketStrategy(tlsSocketStrategy)
-//                     .build();
-//             var httpClient = HttpClientBuilder.create().setConnectionManager(cnxManager).useSystemProperties().build();
-//             var reqFactory = new HttpComponentsClientHttpRequestFactory(httpClient);
-//             builder.requestFactory(reqFactory);
          }
 
         return builder.build();
