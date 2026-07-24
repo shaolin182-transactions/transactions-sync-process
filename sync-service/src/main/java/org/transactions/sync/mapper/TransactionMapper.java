@@ -11,5 +11,6 @@ public interface TransactionMapper {
 
     // Transaction
     org.transactions.clients.transactions.model.Transaction transactionToRest(Transaction transaction);
+    Transaction transactionFromRest(org.transactions.clients.transactions.model.Transaction transaction);
 
 }
