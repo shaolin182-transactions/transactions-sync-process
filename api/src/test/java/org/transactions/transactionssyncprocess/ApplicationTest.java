@@ -11,7 +11,7 @@ import org.transactions.persistence.repositories.TransactionsRepository;
 import org.transactions.transactionssyncprocess.service.AppStartService;
 
 @SpringBootTest
-@ActiveProfiles("test")
+@ActiveProfiles({"test", "mongo-to-es", "mongodb", "es"})
 class ApplicationTest {
 
     @Autowired
@@ -26,7 +26,7 @@ class ApplicationTest {
     TransactionAggregateRepository aggregateRepository;
 
     @Test
-    public void contextLoads() throws Exception {
+    void contextLoads() {
         Assertions.assertNotNull(service);
     }
 }

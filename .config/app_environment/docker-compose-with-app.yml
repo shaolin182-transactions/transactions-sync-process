@@ -1,0 +1,15 @@
+include:
+  - docker-compose.yml
+
+name: transactions_sync_app
+services:
+  transactions-sync-docker:
+    container_name: transactions-sync-docker
+    build:
+      context: ../../
+      dockerfile: Dockerfile
+    # image: jugirard/transactions-sync-process:1.1.0-RC13
+
+    env_file: "app.env"
+    volumes:
+      - ./config:/etc/config

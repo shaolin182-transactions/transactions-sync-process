@@ -1,0 +1,56 @@
+logging:
+  level:
+    root: INFO
+
+spring:
+  ssl:
+    bundle:
+      pem:
+        oauth2:
+          truststore:
+            # For DEV Only
+            certificate: |
+              -----BEGIN CERTIFICATE-----
+              MIIDkzCCAnugAwIBAgIUfsPN6BGaqm5CWdo1/VuykOJ7Nt0wDQYJKoZIhvcNAQEL
+              BQAwWTELMAkGA1UEBhMCQVUxEzARBgNVBAgMClNvbWUtU3RhdGUxITAfBgNVBAoM
+              GEludGVybmV0IFdpZGdpdHMgUHR5IEx0ZDESMBAGA1UEAwwJbG9jYWxob3N0MB4X
+              DTI2MDcxNTE2MDAzNloXDTI3MDcxNTE2MDAzNlowWTELMAkGA1UEBhMCQVUxEzAR
+              BgNVBAgMClNvbWUtU3RhdGUxITAfBgNVBAoMGEludGVybmV0IFdpZGdpdHMgUHR5
+              IEx0ZDESMBAGA1UEAwwJbG9jYWxob3N0MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A
+              MIIBCgKCAQEAr8HKkLQ2ltR5ZiHnoF8Eox/hAoqPHpVLMtMJ4KHI4lZ7cj6Cw4AR
+              t17d08YbEGs+VcHgUl62ppMFvXAghwv+fmWShGknnseMTq3ykTTCS0vWq7DgSB5Q
+              R2LERBhWV3H6xxphACtaiazAeJuQ7tMGSJlPGlWk2yBld6asAvcnKp4SWc0X8EDs
+              5y6vKtXks/kG5trYdk5QpFdXG/d5JVLVBXh69kuIDz0TsrIR5UZvcmNfzdojFtJS
+              IUDRLNMfYx5vf3q7aEwTweSbXYVX2aL9+66Qzi+Clisd1SOfouZMxL90EGOWZ53n
+              Y5bj1atevjrRKfHeQPgSZis2xuBDM6R/sQIDAQABo1MwUTAdBgNVHQ4EFgQUS7eS
+              9AZQVYeu1e1Vb7qXt5Q3OqkwHwYDVR0jBBgwFoAUS7eS9AZQVYeu1e1Vb7qXt5Q3
+              OqkwDwYDVR0TAQH/BAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAQEAfOVczJBaV8MJ
+              /sHZ+UhiGxBZImdskg7Zmo93AuHpU3SkhFHIo2jpf5GMxkGqmDgPfd9Qp8/oZKXz
+              BcmladGIpepv0BIzszzHwnxGHxI7TZTBv23robsfyy+Q8ijp+heNrq5eEFo1qeiL
+              2FMm/Twav6770H4k9z8zdb56jvUi0ZUQ0Dg5Dg0Zuvh3KZ3xim7v2hQQmhj+FvfS
+              1OEiFTkqtz1ndWgVsXloH3S4B/SEFAG2ow+BmTSKg8HKcezklvQ5GL/Gedt8JtAf
+              x2jeV6cmJY80YgX6XnEhLr2Df2yINBMtsxf1vSDY3MQaq7lL50uUhe2aGBhMLCGz
+              /tTH7+2A5A==
+              -----END CERTIFICATE-----
+
+
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            provider: keycloak
+            client-id: transactions-java-server
+            client-secret: ${KEYCLOAK_CLIENT_SECRET}
+            authorization-grant-type: client_credentials
+            scope: openid
+        provider:
+          keycloak:
+            token-uri: https://localhost:8444/auth/realms/transactions
+
+client:
+  transactions:
+    base-url: http://localhost:8080
+
+  oauth2:
+    ssl-bundle-name: oauth2

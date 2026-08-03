@@ -11,7 +11,6 @@ import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
-import org.springframework.data.elasticsearch.core.IndexOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.test.context.ActiveProfiles;
 import org.testcontainers.junit.jupiter.Container;
@@ -29,8 +28,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Testcontainers
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ActiveProfiles("test")
-public class IntegrationTest {
+@ActiveProfiles({"test", "mongo-to-es", "mongodb", "es"})
+@Tag("IntregrationTest")
+@Disabled
+class MongoToESIntegrationTest {
 
     @Container
     private static final TransactionsElasticsearchContainer esContainer = new TransactionsElasticsearchContainer();

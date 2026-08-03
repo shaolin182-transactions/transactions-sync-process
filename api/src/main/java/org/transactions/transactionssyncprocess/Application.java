@@ -9,18 +9,20 @@ import org.springframework.boot.data.elasticsearch.autoconfigure.DataElasticsear
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
-import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.transactions.transactionssyncprocess.service.AppStartService;
 
 @SpringBootApplication(scanBasePackages = "org.transactions", exclude = {DataElasticsearchAutoConfiguration.class})
 @EnableMongoRepositories("org.transactions.persistence.repositories")
-@EnableElasticsearchRepositories("org.transactions.persistence.repositories")
 @ConfigurationPropertiesScan("org.transactions.persistence.config")
 public class Application {
 
+	private final AppStartService startService;
+
 	@Autowired
-	AppStartService startService;
+	public Application(AppStartService startService){
+		this.startService = startService;
+	}
 
 	public static void main(String[] args) {
 		ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);
