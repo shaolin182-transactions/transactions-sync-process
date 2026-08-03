@@ -9,7 +9,6 @@ import org.transactions.sync.mapper.TransactionMapper;
 import org.transactions.transactionssyncprocess.clients.transactions.TransactionRestClient;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Profile("pg-to-es")
 @Service

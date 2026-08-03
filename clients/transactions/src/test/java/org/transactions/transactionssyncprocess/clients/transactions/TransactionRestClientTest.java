@@ -27,7 +27,7 @@ import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMoc
         stubsMode = StubRunnerProperties.StubsMode.CLASSPATH,
         minPort = 8080, maxPort = 8080
 )
-public class TransactionRestClientTest {
+class TransactionRestClientTest {
 
     @Autowired
     TransactionRestClient client;
@@ -43,7 +43,7 @@ public class TransactionRestClientTest {
             .build();
 
     @Test
-    public void createTransaction() {
+    void createTransaction() {
 
         wmServer.stubFor(WireMock.post(WireMock.urlEqualTo("/auth/realms/transactions")).willReturn(
                 WireMock.aResponse()
