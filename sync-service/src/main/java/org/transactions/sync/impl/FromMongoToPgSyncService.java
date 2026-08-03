@@ -44,6 +44,13 @@ public class FromMongoToPgSyncService implements ISyncService {
         this.dataRepo = dataRepo;
     }
 
+    /**
+     * Look for every transaction in source database
+     *
+     * For each transaction :
+     * - check if transaction has already been migrated
+     * - if not, convert it to Postgres format, publish it to Postgres datasource and mark it as migrated
+     */
     @Override
     public void syncDatabase() {
 

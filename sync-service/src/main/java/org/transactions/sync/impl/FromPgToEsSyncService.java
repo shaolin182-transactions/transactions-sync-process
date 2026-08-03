@@ -27,6 +27,9 @@ public class FromPgToEsSyncService implements ISyncService {
         this.mapper = mapper;
     }
 
+    /**
+     * Get all data from datasource, convert them to correct format and publish them to ElasticSearch
+     */
     @Override
     public void syncDatabase() {
         // Delete index from elasticSearch database

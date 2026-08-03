@@ -37,7 +37,7 @@ class FromMongoToPgSyncServiceTest {
     @Test
     void syncDatabase() {
 
-        // Prepare data & mocks
+        // Mock data from source database
         var list = new ArrayList<Transaction>();
         list.add(new Transaction().id("1"));
         list.add(new Transaction().id("2"));
@@ -45,15 +45,15 @@ class FromMongoToPgSyncServiceTest {
         list.add(new Transaction().id("4"));
         doReturn(list).when(trDatasource).getAllTransactions();
 
-
+        // Mock some migrated data to mark them as already migrated
         var migrationData = new MigrationData();
         migrationData.setFromIdRecord("1");
         migrationData.setStatus("DONE");
         when(migrationDataRepository.findByFromIdAndStatus("1", "DONE")).thenReturn(java.util.Optional.of(migrationData));
 
+        // Make rest client success on every requests
         var trRest = new org.transactions.clients.transactions.model.Transaction().id("someID");
         when(transactionRestClient.createTransaction(any())).thenReturn(trRest);
-
         when(transactionMapper.transactionToRest(any())).thenReturn(new org.transactions.clients.transactions.model.Transaction());
 
         // Run service
