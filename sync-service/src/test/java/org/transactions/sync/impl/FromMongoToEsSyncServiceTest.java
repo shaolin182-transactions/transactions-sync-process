@@ -12,8 +12,7 @@ import org.transactions.sync.connector.ITransactionsAggregateDatasource;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class FromMongoToEsSyncServiceTest {
@@ -22,7 +21,7 @@ class FromMongoToEsSyncServiceTest {
     void syncDatabase(@Mock ITransactionsReadOnlyDatasource readOnlyDatasource, @Mock ITransactionsAggregateDatasource aggregateDatasource) {
 
         List<Transaction> transactions = new ArrayList<>();
-        Mockito.when(readOnlyDatasource.getAllTransactions()).thenReturn(transactions);
+        when(readOnlyDatasource.getAllTransactions()).thenReturn(transactions);
 
         new FromMongoToEsSyncService(readOnlyDatasource, aggregateDatasource).syncDatabase();
 

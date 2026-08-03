@@ -1,16 +1,10 @@
 package org.transactions.transactionssyncprocess.clients.transactions.config;
 
-import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
-import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManagerBuilder;
-import org.apache.hc.client5.http.ssl.DefaultClientTlsStrategy;
-import org.apache.hc.client5.http.ssl.NoopHostnameVerifier;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.restclient.autoconfigure.RestClientSsl;
-import org.springframework.boot.ssl.SslBundles;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.security.oauth2.client.AuthorizedClientServiceOAuth2AuthorizedClientManager;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientManager;
@@ -29,13 +23,13 @@ import org.springframework.web.client.RestClient;
 public class OAuth2ClientConfig {
 
     @ConfigurationProperties(prefix = "client.oauth2")
-    @Bean("client-oauth2-config")
+    @Bean("clientOauth2Config")
     public RestClientProperties restClientProperties(){
         return new RestClientProperties();
     }
 
     @Bean("oAuth2RestClient")
-    public RestClient oauth2RestClient(RestClient.Builder builder, RestClientSsl ssl, @Qualifier("client-oauth2-config") RestClientProperties config){
+    public RestClient oauth2RestClient(RestClient.Builder builder, RestClientSsl ssl, @Qualifier("clientOauth2Config") RestClientProperties config){
          builder
             .configureMessageConverters(converters -> {
                 converters.addCustomConverter(new FormHttpMessageConverter());

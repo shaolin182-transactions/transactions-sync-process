@@ -1,6 +1,5 @@
 package org.transactions.sync.impl;
 
-import org.model.transactions.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
@@ -38,7 +37,7 @@ public class FromPgToEsSyncService implements ISyncService {
         List<org.transactions.clients.transactions.model.Transaction> transactions = transactionRestClient.getAllTransactions();
         var trToPublish = transactions.stream()
                 .map(mapper::transactionFromRest)
-                .collect(Collectors.toList());
+                .toList();
 
         // publish data to elasticSearch datasource
         aggregateDatasource.publishData(trToPublish);

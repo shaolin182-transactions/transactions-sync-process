@@ -26,7 +26,7 @@ class ApplicationTest {
     TransactionAggregateRepository aggregateRepository;
 
     @Test
-    public void contextLoads() throws Exception {
+    void contextLoads() {
         Assertions.assertNotNull(service);
     }
 }

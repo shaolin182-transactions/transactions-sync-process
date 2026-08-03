@@ -17,6 +17,7 @@ import org.transactions.sync.repositories.MigrationHistoryRepository;
 import org.transactions.transactionssyncprocess.clients.transactions.TransactionRestClient;
 
 import java.time.OffsetDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,7 +49,7 @@ public class FromMongoToPgSyncService implements ISyncService {
 
         // Init a MigrationHistory object
         var history = new MigrationHistory();
-        history.setDate(OffsetDateTime.now());
+        history.setDate(OffsetDateTime.now(ZoneId.of("UTC")));
 
         var dataMigrated = new ArrayList<MigrationData>();
 
@@ -85,7 +86,7 @@ public class FromMongoToPgSyncService implements ISyncService {
         // Persist data
         history.setMigrationData(dataMigrated);
         history.setNbRecordMigrated(Long.valueOf(dataMigrated.size()));
-        history.setDuration(OffsetDateTime.now().toEpochSecond() - history.getDate().toEpochSecond());
+        history.setDuration(OffsetDateTime.now(ZoneId.of("UTC")).toEpochSecond() - history.getDate().toEpochSecond());
         historyRepo.save(history);
     }
 }

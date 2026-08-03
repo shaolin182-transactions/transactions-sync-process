@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 @Testcontainers
 @SpringBootTest
-public class MigrationDataRepositoryTest {
+class MigrationDataRepositoryTest {
 
     @Autowired
     MigrationHistoryRepository historyRepo;

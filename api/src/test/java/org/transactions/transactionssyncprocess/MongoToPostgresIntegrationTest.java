@@ -33,7 +33,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ActiveProfiles({"test", "mongo-to-pg", "postgresql", "mongodb"})
 @Tag("IntregrationTest")
 @Disabled
-public class MongoToPostgresIntegrationTest {
+class MongoToPostgresIntegrationTest {
 
     @Container
     private static final TransactionsPostgresContainer pgContainer = new TransactionsPostgresContainer();

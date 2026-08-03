@@ -17,8 +17,12 @@ import org.transactions.transactionssyncprocess.service.AppStartService;
 @ConfigurationPropertiesScan("org.transactions.persistence.config")
 public class Application {
 
+	private final AppStartService startService;
+
 	@Autowired
-	AppStartService startService;
+	public Application(AppStartService startService){
+		this.startService = startService;
+	}
 
 	public static void main(String[] args) {
 		ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);

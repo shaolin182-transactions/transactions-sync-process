@@ -14,20 +14,18 @@ import org.transactions.clients.transactions.api.TransactionsApi;
 public class TransactionRestClientConfig {
 
     @ConfigurationProperties(prefix = "client.transactions")
-    @Bean("client-transactions-config")
+    @Bean("clientTransactionsConfig")
     public RestClientProperties restClientProperties(){
         return new RestClientProperties();
     }
 
     @Bean
     public TransactionsApi transactionsApi(ApiClient client) {
-        var api = new TransactionsApi(client);
-
-        return api;
+        return new TransactionsApi(client);
     }
 
     @Bean
-    public ApiClient apiClient(@Qualifier("restClientTransaction") RestClient restClient, @Qualifier("client-transactions-config") RestClientProperties clientProperties) {
+    public ApiClient apiClient(@Qualifier("restClientTransaction") RestClient restClient, @Qualifier("clientTransactionsConfig") RestClientProperties clientProperties) {
         var client = new ApiClient(restClient);
         client.setBasePath(clientProperties.getBaseUrl());
         return client;

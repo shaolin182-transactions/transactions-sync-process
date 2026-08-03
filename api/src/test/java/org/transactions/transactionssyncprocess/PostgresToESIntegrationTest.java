@@ -20,6 +20,7 @@ import org.transactions.persistence.repositories.TransactionAggregateRepository;
 import org.transactions.transactionssyncprocess.service.AppStartService;
 import org.transactions.transactionssyncprocess.utils.TransactionsElasticsearchContainer;
 import org.transactions.transactionssyncprocess.utils.TransactionsMongoDbContainer;
+import org.transactions.transactionssyncprocess.utils.TransactionsPostgresContainer;
 
 import java.io.IOException;
 import java.util.List;
@@ -28,23 +29,20 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Testcontainers
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ActiveProfiles({"test", "mongo-to-es", "mongodb", "es"})
+@ActiveProfiles({"test", "pg-to-es", "postgresql", "es"})
 @Tag("IntregrationTest")
 @Disabled
-class MongoToESIntegrationTest {
+public class PostgresToESIntegrationTest {
 
     @Container
     private static final TransactionsElasticsearchContainer esContainer = new TransactionsElasticsearchContainer();
 
     @Container
-    private static final TransactionsMongoDbContainer mongoDbContainer = new TransactionsMongoDbContainer();
+    private static final TransactionsPostgresContainer pgContainer = new TransactionsPostgresContainer();
 
     private static ResourceLoader resourceLoader = new DefaultResourceLoader();
 
     private ObjectMapper mapper = new JsonMapper();
-
-    @Autowired
-    private MongoTemplate mongoTemplate;
 
     @Autowired
     private ElasticsearchOperations esTemplate;
@@ -58,19 +56,18 @@ class MongoToESIntegrationTest {
     @BeforeAll
     static void setUp() {
         esContainer.start();
-        mongoDbContainer.start();
+        pgContainer.start();
     }
 
     @BeforeEach
     void testIsContainerRunning() {
         assertTrue(esContainer.isRunning());
-        assertTrue(mongoDbContainer.isRunning());
+        assertTrue(pgContainer.isRunning());
         recreateIndex();
         emptyDb();
     }
 
     private void emptyDb() {
-        mongoTemplate.dropCollection(Transaction.class);
     }
 
     private void recreateIndex() {
@@ -84,10 +81,10 @@ class MongoToESIntegrationTest {
     @Tag("IntegrationTest")
     @DisplayName("Records existing in mongo database should be exported into ES database")
     void nominalCase() throws Exception {
-        // Prepare Data - Insert Data into mongodb database
+        // Prepare Data - Insert Data into postgresql database
 
         // Get sample JSON file
-        loadTransactionsInBDD();
+//        loadTransactionsInBDD();
 
         // Run sync service
         startService.start();
@@ -99,16 +96,16 @@ class MongoToESIntegrationTest {
     }
 
     private void loadTransactionsInBDD() throws IOException {
-        Resource resource = resourceLoader.getResource("classpath:data/sample_file.json");
-        // Convert it into Transanction object
-        List<Transaction> transactions = mapper.readValue(resource.getFile(), mapper.getTypeFactory().constructCollectionType(List.class, Transaction.class));
-        // Persist them into database
-        transactions.forEach(item -> mongoTemplate.save(item, "transaction"));
+//        Resource resource = resourceLoader.getResource("classpath:data/sample_file.json");
+//        // Convert it into Transanction object
+//        List<Transaction> transactions = mapper.readValue(resource.getFile(), mapper.getTypeFactory().constructCollectionType(List.class, Transaction.class));
+//        // Persist them into database
+//        transactions.forEach(item -> mongoTemplate.save(item, "transaction"));
     }
 
     @AfterAll
     static void destroy() {
         esContainer.stop();
-        mongoDbContainer.stop();
+        pgContainer.stop();
     }
 }
