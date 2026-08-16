@@ -32,7 +32,7 @@
         <!-- Custom versions -->
         <hamcrest-all.version>3.0</hamcrest-all.version>
         <transaction.version>1.5.0-RC6</transaction.version>
-        <sonar-maven-plugin.version>3.9.1.2184</sonar-maven-plugin.version>
+        <sonar-maven-plugin.version>3.11.0.3922</sonar-maven-plugin.version>
         <mapstruct.version>1.6.3</mapstruct.version>
 
         <!-- Testing -->
