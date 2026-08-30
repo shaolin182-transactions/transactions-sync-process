@@ -3,7 +3,7 @@ services:
 
   mongo6:
     container_name: sync-dev-transactions-mongo-db-6
-    image: mongo:6.0.7
+    image: mongo:6.0.28@sha256:8b6d8f5bbedb25cb73517b65cf99f13aeb75ad5b157a56c479287a840bbad3ac
     ports:
       - "27017:27017"
 
