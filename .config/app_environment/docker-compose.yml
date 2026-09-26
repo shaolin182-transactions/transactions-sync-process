@@ -3,13 +3,13 @@ services:
 
   mongo6:
     container_name: sync-dev-transactions-mongo-db-6
-    image: mongo:6.0.7
+    image: mongo:6.0.7@sha256:bf1d25bae7c2fd47cd9a89eec3db08e73ccfbef666e43f583fa6b560ca07ac5a
     ports:
       - "27017:27017"
 
   elasticsearch:
     container_name: sync-dev-elasticsearch
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.8.1
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.8.1@sha256:27cb808b1029ac75718a12ac16f2c09b0cda6469146b6039fd3573fc2f0711d3
     ports:
       - "9200:9200"
     environment:
